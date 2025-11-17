@@ -1,0 +1,117 @@
+/* Customers.css */
+
+/* General page styling */
+.customers-page {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+  padding: 2rem;
+  font-family: "Inter", sans-serif;
+}
+
+/* Navigation bar */
+.customers-page nav {
+  background-color: #133a46;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #00d9a5;
+  margin-bottom: 2rem;
+}
+
+.customers-page nav .brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Card styling */
+.customer-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+}
+
+/* Table styling */
+.customer-card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.customer-card table thead {
+  background-color: #133a46;
+  color: white;
+}
+
+.customer-card table th,
+.customer-card table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.customer-card table tr:hover {
+  background-color: #f0f0f0;
+}
+
+/* Search input */
+.customer-search {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.customer-search input {
+  flex: 1;
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+}
+
+.customer-search input:focus {
+  border-color: #133a46;
+  box-shadow: 0 0 0 2px rgba(19, 58, 70, 0.2);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #00d9a5;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #00b887;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid #133a46;
+  color: #133a46;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-ghost:hover {
+  background-color: #133a46;
+  color: #fff;
+}
+
+/* Empty state message */
+.empty-message {
+  text-align: center;
+  padding: 2rem;
+  color: #888;
+}

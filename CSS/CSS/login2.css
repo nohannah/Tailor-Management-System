@@ -1,0 +1,87 @@
+/* Body & container */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-card {
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+.login-card h2 {
+    color: #007bff;
+    font-weight: 600;
+}
+
+/* Inputs */
+.form-control {
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+/* Labels */
+.form-label {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Submit buttons */
+.btn-outline-primary {
+    border: 2px solid #007bff;
+    color: #007bff;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background: #007bff;
+    color: #fff;
+}
+
+.btn-outline-success {
+    border: 2px solid #28a745;
+    color: #28a745;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-success:hover {
+    background: #28a745;
+    color: #fff;
+}
+
+/* Role selection container */
+.role-selection p {
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* Links */
+a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #0056b3;
+}

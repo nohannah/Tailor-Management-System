@@ -1,0 +1,125 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+
+nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #133a46;
+	height: 70px;
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 30px;
+}
+
+.logo {
+	font-size: 22px;
+	color: white;
+	font-weight: bold;
+}
+
+ul {
+	list-style: none;
+}
+
+ul li {
+	display: inline-block;
+	margin: 0 10px;
+}
+
+ul li a {
+	text-decoration: none;
+	color: white;
+	font-size: 16px;
+	transition: color 0.3s;
+}
+
+ul li a:hover {
+	color: #00d9a5;
+}
+
+.section1 {
+	position: relative;
+	margin-top: 70px; 
+}
+
+.banner_img {
+	width: 100%;
+	height: 450px;
+	object-fit: cover;
+}
+
+.banner_text {
+	position: absolute;
+	top: 40%;
+	left: 8%;
+	color: white;
+	background: rgba(0, 0, 0, 0.5);
+	padding: 20px;
+	border-radius: 8px;
+}
+
+.banner_text h1 {
+	font-size: 50px;
+	margin: 0;
+}
+
+
+.campus_img {
+	width: 100%;
+	height: 350px;
+	object-fit: cover;
+}
+.footer {
+	background-color: #133a46;
+	color: white;
+	padding: 20px 0;
+	margin-top: 50px;
+}
+
+.footer a {
+	color: #00d9a5;
+	text-decoration: none;
+	margin: 0 5px;
+}
+
+.footer a:hover {
+	text-decoration: underline;
+}
+
+.form_design
+{
+	padding-top: 150px;
+	
+}
+.form_design h1{
+	color: #133a46;
+	background-color: skyblue;
+	width: 400px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.label_design
+{
+	display: inline-block;
+	color: skyblue;
+	width: 100px;
+	text-align: right;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.login_form
+{
+	background-color: #133a46;
+	width: 400px;
+	padding-top: 70px;
+	padding-bottom: 70px;
+
+}

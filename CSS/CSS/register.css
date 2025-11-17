@@ -1,0 +1,98 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body & Background */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: linear-gradient(to top, #e0f7f4, #ffffff), url('../Images/register_bg.jpg') no-repeat bottom center;
+    background-size: cover;
+    min-height: 100vh;
+    padding: 40px 0; /* top and bottom padding */
+}
+
+/* Form Container */
+.form_design {
+    width: 400px;
+    max-width: 90%;
+    margin: 0 auto; /* horizontally center */
+    background-color: #ffffffcc; /* Slightly transparent white */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+/* Form Heading */
+.register_form h1 {
+    margin-bottom: 25px;
+    color: #0d2f3c;
+    font-size: 22px;
+}
+
+/* Labels */
+.register_form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #0d2f3c;
+    text-align: left; /* optional: left-align labels */
+}
+
+/* Inputs & Select */
+.register_form input[type="text"],
+.register_form input[type="email"],
+.register_form input[type="password"],
+.register_form input[type="number"],
+.register_form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+/* Submit Button */
+.register_form input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #00d9a5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.register_form input[type="submit"]:hover {
+    background-color: #00bfa5;
+}
+
+/* Links */
+.register_form p {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.register_form p a {
+    color: #00bfa5;
+    text-decoration: none;
+}
+
+.register_form p a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .form_design {
+        width: 90%;
+        padding: 30px;
+    }
+}

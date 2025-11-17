@@ -12,9 +12,11 @@
 <body>
 <!-- Navigation -->
 <nav>
-    <label class="logo">TailorPro</label>
+    <label class="logo">TailorPro Management</label>
     <ul>
+    <li><a href="home.php" class="active">Home</a></li>
     <li><a href="login.php">Services</a></li>
+    <li><a href="login.php">Orders</a></li>
     <li><a href="contact.php">Contact</a></li>
     <li><a href="login.php" class="btn btn-success btn-sm">Login</a></li>
 </ul>
@@ -26,7 +28,9 @@
     <div class="banner_text">
         <h1>Custom Tailoring Made Easy</h1>
         <p>Manage customers, orders, and payments all in one place.</p>
-       </div>
+        <a href="login.php" class="btn btn-primary mt-3">View Customers</a>
+        <a href="login.php" class="btn btn-outline-light mt-3">View Orders</a>
+    </div>
 </div>
 
 <!-- Services Section -->
