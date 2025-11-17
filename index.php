@@ -22,7 +22,7 @@
 
 <!-- Banner Section -->
 <div class="section1">
-    <img class="banner_img" src="Images/login.jpg" alt="Tailoring Banner">
+    <img class="banner_img" src="image/tailor.jpeg" alt="Tailoring Banner">
     <div class="banner_text">
         <h1>Custom Tailoring Made Easy</h1>
         <p>Manage customers, orders, and payments all in one place.</p>
@@ -35,7 +35,7 @@
         <h2 class="mb-4">Our Services</h2>
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm">
-                <img src="Images/shirts.jpg" class="card-img-top" alt="Shirts">
+                <img src="image/tshirt.jpeg" class="card-img-top" alt="Shirts">
                 <div class="card-body">
                     <h5 class="card-title">Custom Shirts</h5>
                     <p class="card-text">Tailor-made shirts with perfect fit and premium fabric options.</p>
@@ -44,7 +44,7 @@
         </div>
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm">
-                <img src="Images/pants.jpg" class="card-img-top" alt="Pants">
+                <img src="image/pant.jpeg" class="card-img-top" alt="Pants">
                 <div class="card-body">
                     <h5 class="card-title">Pants & Trousers</h5>
                     <p class="card-text">Custom-fitted pants for all occasions and styles.</p>
@@ -53,7 +53,7 @@
         </div>
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm">
-                <img src="Images/dress.jpg" class="card-img-top" alt="Dresses">
+                <img src="image/dress.jpeg" class="card-img-top" alt="Dresses">
                 <div class="card-body">
                     <h5 class="card-title">Dresses & Outfits</h5>
                     <p class="card-text">Elegant and modern dresses tailored to your measurements.</p>
@@ -76,7 +76,7 @@
             </ul>
         </div>
         <div class="col-md-6">
-            <img src="Images/shop.jpg" class="img-fluid rounded shadow" alt="Tailoring Shop">
+            <img src="image/measurement.jpeg" class="img-fluid rounded shadow" alt="Tailoring Shop">
         </div>
     </div>
 </div>
