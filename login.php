@@ -54,8 +54,10 @@ if (isset($_POST['submit'])) {
                 $_SESSION['role'] = "employee";
 
                 header("Location: employee.php");
+                
                 exit();
-            } else {
+            }
+            else {
                 $error = "Invalid password!";
             }
         } else {

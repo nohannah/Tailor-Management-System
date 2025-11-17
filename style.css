@@ -291,3 +291,46 @@ td a:hover {
     color: #333;
     border: 1px solid #ddd;
 }
+/* --- SOCIAL ICONS --- */
+.social-section {
+    background: #f8f9fa;
+}
+
+.social-links li {
+    list-style: none;
+}
+
+.social-links img {
+    width: 45px;
+    height: 45px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.social-links img:hover {
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+/* --- FOOTER --- */
+.website-footer {
+    background: #212529;
+    color: white;
+}
+
+.website-footer .footer-link {
+    color: #ffc107;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.website-footer .footer-link:hover {
+    text-decoration: underline;
+}
+
+/* Mobile Fix */
+@media (max-width: 576px) {
+    .social-links {
+        gap: 15px !important;
+    }
+}
+

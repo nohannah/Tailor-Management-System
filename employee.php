@@ -43,15 +43,26 @@ if (isset($_POST['update'])) {
     $Email = $_POST['email'];
     $Contact = $_POST['Contact'];
     $Address = $_POST['Address'];
+    $Password = $_POST['Password'];
 
-    $update = "UPDATE customer SET 
-    Name='$Name',
-    Age='$Age',
-    Gender='$Gender',
-    Email='$Email',
-    ContactNo='$Contact',
-    Address='$Address'
-    WHERE CustomerID='$CustomerID'";
+    // Base update
+    $update = "
+        UPDATE customer SET 
+        Name='$Name',
+        Age='$Age',
+        Gender='$Gender',
+        Email='$Email',
+        ContactNo='$Contact',
+        Address='$Address'
+    ";
+
+    // If new password given, update + hash it
+    if (!empty($Password)) {
+        $hashed = password_hash($Password, PASSWORD_DEFAULT);
+        $update .= ", Password='$hashed'";
+    }
+
+    $update .= " WHERE CustomerID='$CustomerID'";
 
     if (mysqli_query($connection, $update)) {
         echo "<script>alert('Customer updated successfully!'); window.location='employee.php';</script>";
@@ -84,11 +95,15 @@ if (isset($_POST['save'])) {
     $Email = $_POST['email'];
     $Contact = $_POST['Contact'];
     $Address = $_POST['Address'];
+    $Password = $_POST['Password'];
+
+    // Hash password
+    $hashed = password_hash($Password, PASSWORD_DEFAULT);
 
     // Insert
     $insert = "
-        INSERT INTO customer (CustomerID, Name, Age, Gender, Email, ContactNo, Address)
-        VALUES ('$CustomerID', '$Name', '$Age', '$Gender', '$Email', '$Contact', '$Address')
+        INSERT INTO customer (CustomerID, Name, Age, Gender, Email, ContactNo, Address, Password)
+        VALUES ('$CustomerID', '$Name', '$Age', '$Gender', '$Email', '$Contact', '$Address', '$hashed')
     ";
 
     if (mysqli_query($connection, $insert)) {
@@ -106,6 +121,7 @@ if (isset($_POST['save'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TailorPro - Customer Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
 </head>
 <body>
 
@@ -135,7 +151,7 @@ if (isset($_POST['save'])) {
 
                 <div class="row g-3">
 
-                    <!-- Customer ID (Read-only in edit mode) -->
+                    <!-- Customer ID -->
                     <div class="col-md-2">
                         <label class="form-label">Customer ID</label>
                         <input type="text" name="CustomerID" class="form-control" 
@@ -183,6 +199,15 @@ if (isset($_POST['save'])) {
                             value="<?= $editData['Address'] ?? '' ?>">
                     </div>
 
+                    <!-- PASSWORD FIELD -->
+                    <div class="col-md-4">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="Password" class="form-control" <?= $editData ? "" : "required" ?>>
+                        <?php if ($editData): ?>
+                            <small class="text-muted">Leave blank to keep old password</small>
+                        <?php endif; ?>
+                    </div>
+
                 </div>
 
                 <div class="mt-3">
@@ -220,6 +245,7 @@ if (isset($_POST['save'])) {
                 <th>Email</th>
                 <th>Contact</th>
                 <th>Address</th>
+                <th>Password</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -234,6 +260,10 @@ if (isset($_POST['save'])) {
                     <td><?= $c['Email']; ?></td>
                     <td><?= $c['ContactNo']; ?></td>
                     <td><?= $c['Address']; ?></td>
+
+                    <!-- show ***** instead of real password -->
+                    <td>******</td>
+
                     <td>
                         <a href="employee.php?edit=<?= $c['CustomerID']; ?>" class="btn btn-sm btn-warning">Edit</a>
                     </td>
@@ -246,5 +276,15 @@ if (isset($_POST['save'])) {
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Footer -->
+<footer class="footer">
+    <div class="container text-center">
+        <p>&copy; 2025 TailorPro Management. All rights reserved.</p>
+        <p>
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Terms of Use</a>
+        </p>
+    </div>
+</footer>
 </body>
 </html>
