@@ -1,26 +1,122 @@
 <?php
-// Sample order data (you can later replace this with database results)
-$orders = [
-    ["id" => "CUST001", "customer" => "John Smith", "email" => "smith@gmail.com", "status" => "Completed", "amount" => 250.00],
-    ["id" => "CUST002", "customer" => "Sarah Johnson", "email" => "john@gmail.com", "status" => "In Progress", "amount" => 180.00],
-    ["id" => "CUST003", "customer" => "Michael Brown", "email" => "brown@gmail.com", "status" => "Pending", "amount" => 320.00],
-    ["id" => "CUST004", "customer" => "Emily Davis", "email" => "davis@gmail.com", "status" => "In Progress", "amount" => 150.00],
-    ["id" => "CUST005", "customer" => "David Wilson", "email" => "wilson@gmail.com", "status" => "Completed", "amount" => 275.00],
-];
+include('db_con.php');
 
-// ✅ Handle form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $newOrder = [
-        "id" => $_POST['id'] ?? '',
-        "customer" => $_POST['customer'] ?? '',
-        "email" => $_POST['email'] ?? '',
-        "status" => $_POST['status'] ?? '',
-        "amount" => (float) ($_POST['amount'] ?? 0),
-    ];
+// ---------------- SEARCH ----------------
+$search = $_GET['search'] ?? '';
 
-    // Add new order to array
-    $orders[] = $newOrder;
+if ($search !== "") {
+    $query = "
+        SELECT 
+            o.OrderID, 
+            o.CustomerID, 
+            o.OrderDate, 
+            o.OrderStatus, 
+            o.TotalAmount,
+            c.Name AS CustomerName
+        FROM `order` o
+        JOIN customer c ON o.CustomerID = c.CustomerID
+        WHERE 
+            o.CustomerID LIKE '%$search%' OR
+            c.Name LIKE '%$search%' OR
+            c.Email LIKE '%$search%' OR
+            o.OrderStatus LIKE '%$search%'
+        ORDER BY o.OrderID DESC
+    ";
+} else {
+    $query = "
+        SELECT 
+            o.OrderID, 
+            o.CustomerID, 
+            o.OrderDate, 
+            o.OrderStatus, 
+            o.TotalAmount,
+            c.Name AS CustomerName
+        FROM `order` o
+        JOIN customer c ON o.CustomerID = c.CustomerID
+        ORDER BY o.OrderID DESC
+    ";
 }
+
+$result = mysqli_query($connection, $query);
+if (!$result) die("Query failed: " . mysqli_error($connection));
+$orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+// ---------------- EDIT MODE ----------------
+$editData = null;
+if (isset($_GET['edit'])) {
+    $editID = $_GET['edit'];
+    $editQuery = mysqli_query($connection, "
+        SELECT o.OrderID, o.CustomerID, o.OrderStatus, o.TotalAmount, c.Name AS CustomerName
+        FROM `order` o
+        JOIN customer c ON o.CustomerID = c.CustomerID
+        WHERE o.OrderID=$editID
+    ");
+    $editData = mysqli_fetch_assoc($editQuery);
+}
+
+// ---------------- ADD NEW ORDER ----------------
+if (isset($_POST['save'])) {
+    $CustomerID = $_POST['CustomerID'];
+    $Status = $_POST['Status'];
+    $Amount = $_POST['Amount'];
+
+    // Check if customer exists
+    $check = mysqli_query($connection, "SELECT * FROM customer WHERE CustomerID='$CustomerID'");
+    if (mysqli_num_rows($check) > 0) {
+        // Insert new order
+        $insert = "
+            INSERT INTO `order` (CustomerID, OrderStatus, TotalAmount)
+            VALUES ('$CustomerID', '$Status', '$Amount')
+        ";
+        if (mysqli_query($connection, $insert)) {
+            echo "<script>alert('Order added successfully for Customer ID $CustomerID!'); window.location='order.php';</script>";
+            exit;
+        } else {
+            echo "<script>alert('Insert failed: " . mysqli_error($connection) . "');</script>";
+        }
+    } else {
+        echo "<script>alert('Customer ID does not exist! Please enter a valid existing CustomerID.');</script>";
+    }
+}
+
+// ---------------- UPDATE ORDER ----------------
+if (isset($_POST['update'])) {
+    $OrderID = $_POST['OrderID'];
+    $CustomerID = $_POST['CustomerID'];
+    $Status = $_POST['Status'];
+    $Amount = $_POST['Amount'];
+
+    // Check if customer exists
+    $check = mysqli_query($connection, "SELECT * FROM customer WHERE CustomerID='$CustomerID'");
+    if (mysqli_num_rows($check) > 0) {
+        $update = "
+            UPDATE `order` SET
+                CustomerID='$CustomerID',
+                OrderStatus='$Status',
+                TotalAmount='$Amount'
+            WHERE OrderID='$OrderID'
+        ";
+        if (mysqli_query($connection, $update)) {
+            echo "<script>alert('Order updated successfully!'); window.location='order.php';</script>";
+            exit;
+        } else {
+            echo "<script>alert('Update failed: " . mysqli_error($connection) . "');</script>";
+        }
+    } else {
+        echo "<script>alert('Customer ID does not exist!');</script>";
+    }
+}
+
+// ---------------- DELETE ORDER ----------------
+if (isset($_GET['delete'])) {
+    $deleteID = $_GET['delete'];
+    mysqli_query($connection, "DELETE FROM `order` WHERE OrderID=$deleteID");
+    header("Location: order.php");
+    exit;
+}
+
+// ---------------- GET ALL CUSTOMERS ----------------
+$customers = mysqli_query($connection, "SELECT CustomerID, Name FROM customer ORDER BY Name ASC");
 ?>
 
 <!DOCTYPE html>
@@ -29,101 +125,116 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TailorPro - Order Management</title>
-
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-light">
 
-<header class="navbar bg-dark p-3 shadow-sm mb-4">
-    <button class="btn btn-outline-secondary me-3" onclick="history.back()">← Back</button>
-    <h3 class="m-0">✂️ TailorPro</h3>
+<header class="navbar bg-dark p-3 mb-4 shadow-sm">
+    <button class="btn btn-outline-light" onclick="window.location.href='main.php'">← Back</button>
+    <h3 class="text-white ms-3">✂️ TailorPro - Orders</h3>
 </header>
 
-<main class="container">
-
+<div class="container">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
-            <h2>Order Management</h2>
-            <p class="text-muted">Track and manage customer orders</p>
+            <h2><?= $editData ? "Edit Order" : "Order Management"; ?></h2>
+            <p class="text-muted">Track and manage all tailor orders</p>
         </div>
-        <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#newOrderForm">+ New Order</button>
+
+        <?php if (!$editData): ?>
+            <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#newOrder">+ New Order</button>
+        <?php endif; ?>
     </div>
 
-    <!-- 🧾 New Order Form -->
-    <div id="newOrderForm" class="collapse mb-4">
+    <!-- ADD/EDIT ORDER FORM -->
+    <div id="newOrder" class="collapse show mb-4">
         <div class="card card-body">
             <form method="POST">
+                <?php if ($editData): ?>
+                    <input type="hidden" name="OrderID" value="<?= $editData['OrderID'] ?>">
+                <?php endif; ?>
+
                 <div class="row g-3">
-                    <div class="col-md-2">
+
+                    <div class="col-md-4">
                         <label class="form-label">Customer ID</label>
-                        <input type="text" name="id" class="form-control" placeholder="CUST006" required>
+                        <input type="text" name="CustomerID" class="form-control"
+                               value="<?= $editData['CustomerID'] ?? '' ?>" placeholder="Enter existing Customer ID" required>
+                        <small class="text-muted">Enter an existing Customer ID to add a new order.</small>
                     </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Name</label>
-                        <input type="text" name="customer" class="form-control" placeholder="Customer Name" required>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" placeholder="example@gmail.com" required>
-                    </div>
-                    <div class="col-md-2">
+
+                    <div class="col-md-4">
                         <label class="form-label">Status</label>
-                        <select name="status" class="form-select">
-                            <option value="Pending">Pending</option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Completed">Completed</option>
+                        <select name="Status" class="form-select">
+                            <option <?= ($editData['OrderStatus'] ?? '') == "Pending" ? "selected" : ""; ?>>Pending</option>
+                            <option <?= ($editData['OrderStatus'] ?? '') == "In Progress" ? "selected" : ""; ?>>In Progress</option>
+                            <option <?= ($editData['OrderStatus'] ?? '') == "Completed" ? "selected" : ""; ?>>Completed</option>
                         </select>
                     </div>
-                    <div class="col-md-2">
+
+                    <div class="col-md-4">
                         <label class="form-label">Amount ($)</label>
-                        <input type="number" name="amount" step="0.01" class="form-control" placeholder="0.00" required>
+                        <input type="number" name="Amount" step="0.01" class="form-control"
+                               value="<?= $editData['TotalAmount'] ?? '' ?>" required>
                     </div>
                 </div>
+
                 <div class="mt-3">
-                    <button class="btn btn-success" type="submit">Save Order</button>
+                    <?php if ($editData): ?>
+                        <button class="btn btn-warning" name="update">Update Order</button>
+                        <a href="order.php" class="btn btn-secondary">Cancel</a>
+                    <?php else: ?>
+                        <button class="btn btn-success" name="save">Save Order</button>
+                    <?php endif; ?>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- 🧍 Order Table -->
+    <!-- SEARCH BAR -->
+    <form method="GET" class="mb-3">
+        <div class="input-group" style="max-width: 350px;">
+            <input type="text" name="search" class="form-control" placeholder="Search order..."
+                   value="<?= $search ?>">
+            <button class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <!-- ORDER TABLE -->
     <table class="table table-bordered table-striped bg-white">
         <thead class="table-light">
             <tr>
-                <th>Cust ID</th>
+                <th>Order ID</th>
+                <th>Customer ID</th>
                 <th>Name</th>
-                <th>Email</th>
+                <th>Order Date</th>
                 <th>Status</th>
-                <th>Total</th>
-                <th>Actions</th>
+                <th>Amount</th>
+                <th width="120">Actions</th>
             </tr>
         </thead>
+
         <tbody>
-            <?php foreach ($orders as $order): ?>
-                <?php 
-                    // convert status to css class like "status-completed"
-                    $statusClass = strtolower(str_replace(' ', '-', $order['status']));
-                ?>
+            <?php foreach ($orders as $o): ?>
                 <tr>
-                    <td><?= htmlspecialchars($order['id']); ?></td>
-                    <td><?= htmlspecialchars($order['customer']); ?></td>
-                    <td><?= htmlspecialchars($order['email']); ?></td>
-                    <td><span class="status <?= $statusClass; ?>"><?= htmlspecialchars($order['status']); ?></span></td>
-                    <td>$<?= number_format($order['amount'], 2); ?></td>
+                    <td><?= $o['OrderID'] ?></td>
+                    <td><?= $o['CustomerID'] ?></td>
+                    <td><?= $o['CustomerName'] ?></td>
+                    <td><?= $o['OrderDate'] ?></td>
+                    <td><?= $o['OrderStatus'] ?></td>
+                    <td>$<?= number_format($o['TotalAmount'], 2) ?></td>
                     <td>
-                        <button class="btn btn-sm btn-warning">Edit</button>
-                        <button class="btn btn-sm btn-danger">Delete</button>
+                        <a href="order.php?edit=<?= $o['OrderID'] ?>" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="order.php?delete=<?= $o['OrderID'] ?>" 
+                           onclick="return confirm('Delete this order?')" 
+                           class="btn btn-sm btn-danger">Delete</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 
-</main>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

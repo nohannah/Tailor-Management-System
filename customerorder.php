@@ -28,7 +28,7 @@
     <div class="banner_text">
         <h1>Custom Tailoring Made Easy</h1>
         <p>Manage customers, orders, and payments all in one place.</p>
-        <a href="customer.php" class="btn btn-primary mt-3">View Customers</a>
+        <a href="employee.php" class="btn btn-primary mt-3">View Customers</a>
         <a href="order.php" class="btn btn-outline-light mt-3">View Orders</a>
     </div>
 </div>
