@@ -61,30 +61,30 @@ $result = mysqli_stmt_get_result($stmt);
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-
+<!-- Navigation -->
 <nav>
     <label class="logo">TailorPro</label>
     <ul>
-        <li><a href="customer.php">Home</a></li>
-        <li><a href="services.php">Make New Order</a></li>
-        <li><a href="login.php">Logout</a></li>
+        
+            <a href="customer.php" class="btn btn-outline-light me-2">Home</a>
+            <a href="services.php" class="btn btn-outline-light me-2">Make New Order</a>
+            <a href="login.php" class="btn btn-danger">Logout</a>
+
     </ul>
 </nav>
-
-<div class="container">
+</nav>
+<div class="container mt-4">
     <h2>Your Orders</h2>
 
     <!-- FILTER FORM -->
     <form method="GET" class="row mt-3 mb-4">
-
         <!-- Garment Filter -->
         <div class="col-md-4">
             <label>Filter by Garment</label>
             <select name="garment" class="form-control">
                 <option value="">All Garments</option>
                 <?php while ($g = mysqli_fetch_assoc($garment_result)) { ?>
-                    <option value="<?php echo $g['GarmentTypeID']; ?>"
-                        <?php if ($filter_garment == $g['GarmentTypeID']) echo "selected"; ?>>
+                    <option value="<?php echo $g['GarmentTypeID']; ?>" <?php if ($filter_garment == $g['GarmentTypeID']) echo "selected"; ?>>
                         <?php echo $g['Name']; ?>
                     </option>
                 <?php } ?>
@@ -106,19 +106,19 @@ $result = mysqli_stmt_get_result($stmt);
         <div class="col-md-4 d-flex align-items-end">
             <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
         </div>
-
     </form>
 
     <!-- ORDER TABLE -->
     <?php if (mysqli_num_rows($result) > 0) { ?>
-        <table class="table table-bordered mt-3">
-            <thead>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
                 <tr>
                     <th>Order ID</th>
                     <th>Garments</th>
                     <th>Order Date</th>
                     <th>Status</th>
                     <th>Total Amount</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -129,14 +129,20 @@ $result = mysqli_stmt_get_result($stmt);
                         <td><?php echo $row['OrderDate']; ?></td>
                         <td><?php echo $row['OrderStatus']; ?></td>
                         <td><?php echo number_format($row['TotalAmount'], 2); ?></td>
+                        <td>
+                            <?php if ($row['OrderStatus'] === 'Pending') { ?>
+                                <a href="payment.php?order_id=<?php echo $row['OrderID']; ?>" class="btn btn-success btn-sm">Pay Now</a>
+                            <?php } else { ?>
+                                <span class="text-muted">N/A</span>
+                            <?php } ?>
+                        </td>
                     </tr>
                 <?php } ?>
             </tbody>
         </table>
     <?php } else { ?>
-        <p class="no-orders">No orders found for selected filters.</p>
+        <p class="text-muted">No orders found for selected filters.</p>
     <?php } ?>
-
 </div>
 
 </body>

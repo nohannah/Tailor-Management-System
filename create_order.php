@@ -152,7 +152,7 @@ if (isset($_POST['submit'])) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <style>
 body { background-color: #f8f9fa; }
-nav { background-color: #343a40; padding: 10px; }
+
 nav label.logo { color: #fff; font-weight: bold; font-size: 24px; }
 nav ul { list-style: none; display: flex; gap: 15px; }
 nav ul li a { color: #fff; text-decoration: none; }
@@ -164,14 +164,17 @@ input.form-control { background: #f1f3f5; }
 </style>
 </head>
 <body>
-<nav class="d-flex align-items-center justify-content-between">
+
+<!-- Navbar -->
+<nav>
     <label class="logo">TailorPro</label>
-    <ul class="d-flex align-items-center mb-0">
-        <li><a href="customer.php" class="me-3">Home</a></li>
-        <li><a href="services.php" class="me-3">Services</a></li>
-        <li><a href="login.php" class="btn btn-danger btn-sm">Logout</a></li>
+    <ul>
+        <a href="customer.php" class="btn btn-outline-light me-2">Home</a>
+        <a href="contact.php" class="btn btn-outline-light me-2">Contact</a>
+        <a href="login.php" class="btn btn-danger">Logout</a>
     </ul>
 </nav>
+
 
 <div class="container mt-5">
     <h2 class="mb-4">Place Order for: <?php echo htmlspecialchars($garment['Name'] ?? 'Garment'); ?></h2>
@@ -252,6 +255,30 @@ input.form-control { background: #f1f3f5; }
                 <input type="number" step="0.01" name="Thigh" class="form-control" value="<?php echo htmlspecialchars($latest_measurement['Thigh'] ?? ''); ?>">
             </div>
         </div>
+  <!-- Design Description & Image Preview (Preview Only) -->
+<h4 class="mt-4">Design Reference</h4>
+
+<div class="mb-3">
+    <label class="form-label">Design Description</label>
+    <textarea name="DesignDescription" class="form-control" placeholder="Describe the design the customer wants..."></textarea>
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Upload Design Image</label>
+    <input type="file" class="form-control" id="designImage" accept="image/*">
+    <img id="designPreview" src="#" alt="Design Preview" style="display:none; max-width:200px; margin-top:10px; border:1px solid #ccc; border-radius:5px;">
+</div>
+<!-- JS for image preview -->
+<script>
+document.getElementById('designImage').addEventListener('change', function(event) {
+    const [file] = this.files;
+    if (file) {
+        const preview = document.getElementById('designPreview');
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = 'block';
+    }
+});
+</script>
 
         <div class="mb-3 mt-4">
             <input type="submit" name="submit" value="Place Order" class="btn btn-primary w-100">

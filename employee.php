@@ -126,7 +126,7 @@ if (isset($_POST['save'])) {
 <body>
 
 <header class="navbar bg-dark p-3 text-white">
-    <button class="btn btn-outline-light" onclick="window.location.href='customerorder.php'">← Back</button>
+    <button class="btn btn-outline-light" onclick="window.location.href='index2.php'">← Back</button>
     <h3 class="ms-3">✂️ TailorPro - Customer Management</h3>
 </header>
 

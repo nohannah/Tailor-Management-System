@@ -53,7 +53,7 @@ if (isset($_POST['submit'])) {
                 $_SESSION['employee_id'] = $row['EmployeeID'];
                 $_SESSION['role'] = "employee";
 
-                header("Location: employee.php");
+                header("Location: customerorder.php");
                 
                 exit();
             }
