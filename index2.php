@@ -3,8 +3,8 @@ session_start();
 include('db_con.php');
 
 // Ensure customer is logged in
-if (!isset($_SESSION['customer_id'])) {
-    header("Location: login.php");
+if (!isset($_SESSION['employee_id'])) {
+    header("Location: index2.php");
     exit();
 }
 
@@ -26,9 +26,8 @@ $customer_id = $_SESSION['customer_id']; // Now $customer_id is defined for link
 <nav>
     <label class="logo">TailorPro</label>
     <ul>
-        <li><a href="services.php">Services</a></li>
-        <li><a href="order.php">Orders</a></li>
-        <li><a href="contact2.php">Contact</a></li>
+        <li><a href="employee.php">Services</a></li>
+        <li><a href="createorder2.php">Orders</a></li>
         <li><a href="login.php" class="btn btn-danger btn-sm">Logout</a></li>
     </ul>
 </nav>
@@ -39,7 +38,8 @@ $customer_id = $_SESSION['customer_id']; // Now $customer_id is defined for link
     <div class="banner_text">
         <h1>Custom Tailoring Made Easy</h1>
         <p>Manage customers, orders, and payments all in one place.</p>
-        <a href="order.php" class="btn btn-outline-light mt-3">View Orders</a>
+        <a href="employee.php" class="btn btn-primary mt-3">View Customers</a>
+        <a href="createorder2.php" class="btn btn-outline-light mt-3">View Orders</a>
     </div>
 </div>
 
