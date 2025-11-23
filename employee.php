@@ -134,7 +134,6 @@ if (isset($_POST['save'])) {
         <li><a href="index2.php">Home</a></li>
         <li><a href="employee.php">CustomerManagement</a></li>
         <li><a href="createorder2.php">CustomerOrders</a></li>
-       
         <li> <a href="logout.php" class="btn btn-danger btn-sm">Logout</a></li>
        
     </ul>

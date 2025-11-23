@@ -35,8 +35,8 @@ while ($row = mysqli_fetch_assoc($result)) {
     <label class="logo">TailorPro</label>
     <ul>
         <li><a href="customer.php">Home</a></li>
-        <li><a href="contact.php">Contact</a></li>
-        <li><a href="index.php" class="btn btn-danger btn-sm">Logout</a></li>
+    <li><a href="contact.php">Contact</a></li>
+    <li><a href="logout.php" class="btn btn-success btn-sm">Logout</a></li>
     </ul>
 </nav>
 

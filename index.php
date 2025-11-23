@@ -16,7 +16,7 @@
     <ul>
     <li><a href="login.php">Services</a></li>
     <li><a href="contact.php">Contact</a></li>
-    <li><a href="login.php" class="btn btn-success btn-sm">Login</a></li>
+    <li><a href="logout.php" class="btn btn-success btn-sm">Login</a></li>
 </ul>
 </nav>
 
