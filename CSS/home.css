@@ -10,7 +10,63 @@ body {
     font-family: "Inter", sans-serif;
     background-color: #f5f7fa;
     color: #333;
+    padding-top: 150px !important;
+
 }
+/* Compact Order Form Box */
+.order-box {
+    max-width: 850px;        /* smaller width */
+    margin: 150px auto 30px; /* pushes down safely below navbar */
+    background: #fffce8;     /* soft light yellow */
+    padding: 25px 30px;
+    border: 1px solid #e7dca0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Title */
+.order-box h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #133a46;
+    margin-bottom: 18px;
+}
+
+/* Labels */
+.order-box .form-label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Input Fields */
+.order-box .form-select,
+.order-box .form-control {
+    font-size: 14px;
+    height: 38px;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+/* Description Box */
+.order-box textarea {
+    height: 80px;
+    resize: none;
+    font-size: 14px;
+}
+
+/* Image Preview */
+.order-box img {
+    margin-top: 10px;
+    border-radius: 6px;
+}
+
+/* Submit Button */
+.order-box button {
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 6px;
+}
+
 
 /* Navbar styling */
 nav {
@@ -18,22 +74,24 @@ nav {
     top: 0;
     left: 0;
     width: 100%;
-    height: 70px;
-    background-color: #133a46;
+    background: #ffffff; /* White navbar */
+    padding: 15px 20px;
+    z-index: 2000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 30px;
-    z-index: 10;
 }
 
+/* Navbar logo */
 nav .logo {
     font-size: 24px;
     font-weight: bold;
-    color: #fff;
+    color: #133a46; /* Dark green-blue */
     letter-spacing: 1px;
 }
 
+/* Navbar List */
 nav ul {
     list-style: none;
     display: flex;
@@ -44,24 +102,25 @@ nav ul li {
     margin: 0 10px;
 }
 
+/* Navbar Links */
 nav ul li a {
     text-decoration: none;
-    color: #fff;
+    color: #133a46; /* FIX: visible on white navbar */
     font-size: 16px;
-    transition: color 0.3s;
+    transition: 0.3s;
     padding: 6px 10px;
     border-radius: 5px;
 }
 
 nav ul li a:hover {
     background-color: #00d9a5;
-    color: #133a46;
+    color: white;
 }
 
 /* Banner Section */
 .section1 {
     position: relative;
-    margin-top: 70px; /* leave space for navbar */
+    margin-top: 70px; /* Extra space */
     text-align: center;
 }
 
@@ -158,17 +217,6 @@ nav ul li a:hover {
     margin-bottom: 20px;
     text-align: center;
     color: #133a46;
-}
-
-/* About Section */
-.container ul {
-    list-style-type: disc;
-    padding-left: 20px;
-}
-
-.container ul li {
-    margin-bottom: 10px;
-    font-size: 16px;
 }
 
 /* Footer styling */

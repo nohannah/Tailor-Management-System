@@ -121,27 +121,43 @@ if (isset($_POST['save'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TailorPro - Customer Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="CSS/home.css">
+
     
 </head>
 <body>
 
-<header class="navbar bg-dark p-3 text-white">
-    <button class="btn btn-outline-light" onclick="window.location.href='index2.php'">← Back</button>
-    <h3 class="ms-3">✂️ TailorPro - Customer Management</h3>
-</header>
+<!-- FIXED NAVBAR -->
+<nav class="main-nav">
+    <label class="logo">TailorPro</label>
+    <ul>
+        <li><a href="index2.php">Home</a></li>
+        <li><a href="employee.php">CustomerManagement</a></li>
+        <li><a href="createorder2.php">CustomerOrders</a></li>
+       
+        <li> <a href="logout.php" class="btn btn-danger btn-sm">Logout</a></li>
+       
+    </ul>
+</nav>
 
-<main class="container my-4">
-
-    <!-- Heading -->
+<!-- PAGE HEADER (non-overlapping) -->
+<header class="page-header container mt-5 pt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
             <h2><?= $editData ? "Edit Customer" : "Customer Management"; ?></h2>
             <p class="text-muted">Track and manage your customers</p>
         </div>
+
         <?php if (!$editData): ?>
             <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#newCustomer">+ New Customer</button>
         <?php endif; ?>
     </div>
+</header>
+
+
+<main class="container my-4">
+
+   
 
     <!-- ADD or EDIT FORM -->
     <div id="newCustomer" class="collapse show mb-4">
