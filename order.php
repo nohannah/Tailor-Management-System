@@ -146,6 +146,16 @@ $result = mysqli_stmt_get_result($stmt);
         <p class="text-muted">No orders found for selected filters.</p>
     <?php } ?>
 </div>
+<!-- Footer -->
+<footer class="footer">
+    <div class="container text-center">
+        <p>&copy; 2025 TailorPro Management. All rights reserved.</p>
+        <p>
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Terms of Use</a>
+        </p>
+    </div>
+</footer>
 
 </body>
 </html>

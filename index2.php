@@ -108,6 +108,9 @@ $customer_id = $_SESSION['customer_id']; // Now $customer_id is defined for link
     </div>
 </div>
 
+
+
+</body>
 <!-- Footer -->
 <footer class="footer">
     <div class="container text-center">
@@ -118,6 +121,4 @@ $customer_id = $_SESSION['customer_id']; // Now $customer_id is defined for link
         </p>
     </div>
 </footer>
-
-</body>
 </html>

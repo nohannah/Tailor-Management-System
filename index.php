@@ -81,6 +81,8 @@
     </div>
 </div>
 
+
+</body>
 <!-- Footer -->
 <footer class="footer">
     <div class="container text-center">
@@ -91,5 +93,4 @@
         </p>
     </div>
 </footer>
-</body>
 </html>
