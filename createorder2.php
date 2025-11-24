@@ -148,12 +148,12 @@ if ($filterCustomer !== "") {
 <head>
     <title>TailorPro - Orders</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="CSS/home.css">
+    <link rel="stylesheet" type="text/css" href="CSS/home1.css">
 
 </head>
 <body class="bg-light">
 
-<header class="navbar bg-dark p-3 mb-4 shadow-sm">
+<header class="navbar  p-3 mb-4 shadow-sm">
   <nav>
     <label class="logo">TailorPro</label>
     <ul>

@@ -7,8 +7,8 @@ if (!isset($_SESSION['employee_id'])) {
     header("Location: index2.php");
     exit();
 }
-
-$customer_id = $_SESSION['customer_id']; // Now $customer_id is defined for links
+$customer_id = $_SESSION['customer_id'] ?? null;
+ // Now $customer_id is defined for links
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,12 +18,12 @@ $customer_id = $_SESSION['customer_id']; // Now $customer_id is defined for link
 <title>TailorPro</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" type="text/css" href="CSS/home.css">
+<link rel="stylesheet" type="text/css" href="CSS/home1.css">
 </head>
 <body>
 
 <!-- Navigation -->
-<header class="navbar bg-dark p-3 mb-4 shadow-sm">
+<header class="navbar p-3 mb-4 shadow-sm">
   <nav>
     <label class="logo">TailorPro</label>
     <ul>
