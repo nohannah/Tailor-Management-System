@@ -10,13 +10,13 @@ body {
     font-family: "Inter", sans-serif;
     background-color: #f5f7fa;
     color: #333;
-
 }
+
 /* Compact Order Form Box */
 .order-box {
-    max-width: 850px;        /* smaller width */
-    margin: 150px auto 30px; /* pushes down safely below navbar */
-    background: #fffce8;     /* soft light yellow */
+    max-width: 850px;
+    margin: 150px auto 30px;
+    background: #fffce8;
     padding: 25px 30px;
     border: 1px solid #e7dca0;
     border-radius: 12px;
@@ -66,60 +66,87 @@ body {
     border-radius: 6px;
 }
 
+/* ------------------------------- */
+/*         NAVBAR (Dark Green)     */
+/* ------------------------------- */
 
-/* Navbar styling */
-nav {
+/* target header.navbar nav specifically to avoid Bootstrap overrides */
+header.navbar nav {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background: #ffffff; /* White navbar */
-    padding: 15px 20px;
+    background: #0f2f25; /* Dark green background */
+    padding: 12px 20px;
     z-index: 2000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 /* Navbar logo */
-nav .logo {
+header.navbar nav .logo {
     font-size: 24px;
-    font-weight: bold;
-    color: #133a46; /* Dark green-blue */
+    font-weight: 700;
+    color: #ffffff; /* white logo text on dark background */
     letter-spacing: 1px;
+    display: inline-block;
 }
 
 /* Navbar List */
-nav ul {
+header.navbar nav ul {
     list-style: none;
     display: flex;
     align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
-nav ul li {
-    margin: 0 10px;
+header.navbar nav ul li {
+    margin: 0 8px;
 }
 
-/* Navbar Links */
-nav ul li a {
+/* Navbar Links - more specific selector to beat bootstrap */
+header.navbar nav ul li a {
     text-decoration: none;
-    color: #133a46; /* FIX: visible on white navbar */
+    color: #ffffff; /* white text on dark background */
     font-size: 16px;
-    transition: 0.3s;
+    transition: background-color 0.2s, color 0.2s;
     padding: 6px 10px;
-    border-radius: 5px;
+    border-radius: 6px;
+    display: inline-block;
 }
 
-nav ul li a:hover {
-    background-color: #00d9a5;
-    color: white;
+/* Hover effect (link) */
+header.navbar nav ul li a:hover {
+    background-color: rgba(255,255,255,0.12);
+    color: #ffffff;
 }
 
-/* Banner Section */
+/* Logout button (custom) */
+header.navbar nav ul li a.logout-btn {
+    background: transparent; /* transparent with white text */
+    color: #ffffff;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 2px solid rgba(221, 29, 29, 0.12);
+}
+
+/* Logout hover */
+header.navbar nav ul li a.logout-btn:hover {
+    background: #ffffff;
+    color: #0f2f25;
+    border-color: #ffffff;
+}
+
+/* ------------------------------- */
+/*            BANNER               */
+/* ------------------------------- */
 .section1 {
     position: relative;
-    margin-top: 70px; /* Extra space */
+    margin-top: 70px; /* leaves space for fixed navbar */
     text-align: center;
 }
 
@@ -128,6 +155,7 @@ nav ul li a:hover {
     max-height: 450px;
     object-fit: cover;
     border-radius: 0 0 12px 12px;
+    display: block;
 }
 
 .banner_text {
@@ -157,28 +185,33 @@ nav ul li a:hover {
     text-decoration: none;
 }
 
-/* Buttons */
+/* Buttons: override Bootstrap defaults with theme colors */
 .btn-primary {
-    background-color: #00d9a5;
-    color: #fff;
-    padding: 10px 20px;
+    background-color: #0f6b52; /* deep green for primary actions */
+    border-color: #0f6b52;
+    color: #ffffff;
+    padding: 10px 18px;
     border-radius: 8px;
-    border: none;
-    transition: 0.3s;
 }
 
-.btn-primary:hover {
-    background-color: #00b88f;
-    color: #fff;
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #0d5b45;
+    border-color: #0d5b45;
+    color: #ffffff;
 }
 
+/* Outline light button adapted for banner */
 .btn-outline-light {
-    color: #fff;
-    border: 2px solid #fff;
+    color: #ffffff;
+    border: 2px solid rgba(255,255,255,0.9);
+    background: transparent;
+    padding: 8px 18px;
+    border-radius: 8px;
 }
 
 .btn-outline-light:hover {
-    background-color: #fff;
+    background-color: #ffffff;
     color: #133a46;
 }
 
@@ -246,9 +279,9 @@ nav ul li a:hover {
         font-size: 16px;
     }
 
-    nav ul li a {
+    header.navbar nav ul li a {
         font-size: 14px;
-        padding: 4px 8px;
+        padding: 6px 8px;
     }
 
     .card img {

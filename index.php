@@ -10,16 +10,17 @@
 <link rel="stylesheet" type="text/css" href="CSS/home.css">
 </head>
 <body>
-<!-- Navigation -->
+<!-- Navigation -->\
+ <header class="navbar p-3 mb-4 shadow-sm">
 <nav>
     <label class="logo">TailorPro</label>
     <ul>
     <li><a href="login.php">Services</a></li>
     <li><a href="contact.php">Contact</a></li>
-    <li><a href="logout.php" class="btn btn-success btn-sm">Login</a></li>
+    <li><a href="logout.php" class="btn btn-danger btn-sm">Login</a></li>
 </ul>
 </nav>
-
+</header>
 <!-- Banner Section -->
 <div class="section1">
     <img class="banner_img" src="image/tailor.jpeg" alt="Tailoring Banner">

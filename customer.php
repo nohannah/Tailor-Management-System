@@ -23,15 +23,17 @@ $customer_id = $_SESSION['customer_id']; // Now $customer_id is defined for link
 <body>
 
 <!-- Navigation -->
+<header class="navbar p-3 mb-4 shadow-sm">
 <nav>
     <label class="logo">TailorPro</label>
     <ul>
         <li><a href="services.php">Services</a></li>
         <li><a href="order.php">Orders</a></li>
         <li><a href="contact2.php">Contact</a></li>
-        <li><a href="login.php" class="btn btn-danger btn-sm">Logout</a></li>
+        <li><a href="login.php" class="btn btn-success btn-sm">Logout</a></li>
     </ul>
 </nav>
+</header>
 
 <!-- Banner Section -->
 <div class="section1">

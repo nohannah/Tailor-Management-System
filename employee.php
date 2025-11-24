@@ -128,16 +128,19 @@ if (isset($_POST['save'])) {
 <body>
 
 <!-- FIXED NAVBAR -->
-<nav class="main-nav">
+<header class="navbar p-3 mb-4 shadow-sm">
+  <nav>
     <label class="logo">TailorPro</label>
     <ul>
         <li><a href="index2.php">Home</a></li>
         <li><a href="employee.php">CustomerManagement</a></li>
         <li><a href="createorder2.php">CustomerOrders</a></li>
-        <li> <a href="logout.php" class="btn btn-danger btn-sm">Logout</a></li>
-       
+        <!-- changed here: remove bootstrap btn-danger so it doesn't stay red -->
+       <li><a href="logout.php" class=" btn btn-danger btn-sm">Logout</a></li>
     </ul>
-</nav>
+  </nav>
+</header>
+
 
 <!-- PAGE HEADER (non-overlapping) -->
 <header class="page-header container mt-5 pt-4">

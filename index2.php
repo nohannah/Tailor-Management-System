@@ -30,10 +30,12 @@ $customer_id = $_SESSION['customer_id'] ?? null;
         <li><a href="index2.php">Home</a></li>
         <li><a href="employee.php">CustomerManagement</a></li>
         <li><a href="createorder2.php">CustomerOrders</a></li>
-       <li> <a href="logout.php" class="btn btn-danger btn-sm">Logout</a></li>
+        <!-- changed here: remove bootstrap btn-danger so it doesn't stay red -->
+       <li><a href="logout.php" class="btn btn-danger btn-sm">Logout</a></li>
     </ul>
-</nav>
+  </nav>
 </header>
+
 
 <!-- Banner Section -->
 <div class="section1">
